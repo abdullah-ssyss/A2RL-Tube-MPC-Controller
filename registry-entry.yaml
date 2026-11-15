@@ -1,13 +1,11 @@
-# Add this item under plugins: in AV-Lab/avlite-community-plugins/plugins.yaml.
-# Replace YOUR_ACCOUNT and create the v0.1.0 tag before submitting.
-name: avlite_a2rl_tube_mpc
-display_name: A2RL Tube MPC Controller
-description: Standalone robust lateral Tube MPC controller consuming AVLite plans.
-repository: https://github.com/YOUR_ACCOUNT/avlite_a2rl_tube_mpc
-version: v0.1.0
-author: YOUR_ACCOUNT
+# Entry under plugins: in AV-Lab/avlite-community-plugins/plugins.yaml.
+name: race_tube_mpc
+display_name: Tube MPC Controller
+description: Tube MPC Controller for smooth high speed autonomous racing
+repository: https://github.com/abdullah-ssyss/A2RL-Tube-MPC-Controller
+version: latest
+author: Abdullah Al-Mashhadany, Osama Elmahdy
 category:
   - ControlStrategy
-min_avlite_version: "0.5.3"
+min_avlite_version: "0.6.6"
 require_ros: false
-dependency_notes: "Requires AVLite >=0.5.3,<0.6 and OSQP."
