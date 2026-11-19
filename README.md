@@ -1,8 +1,8 @@
 # A2RL Tube MPC Controller for AVLite
 
 Standalone community **control** plugin extracted from
-[AA05](https://github.com/OsamaMIT/AA05). Copy the contents of this directory
-to the root of a new GitHub repository named `avlite_a2rl_tube_mpc`.
+[AA05](https://github.com/OsamaMIT/AA05), listed in the AVLite community
+registry as `race_tube_mpc`.
 
 This directory contains only the lateral Tube MPC solver, its AVLite control
 adapter, parameters and tests. It has no imports from `chrono_a2rl`, no RL
@@ -42,25 +42,26 @@ current reference plan.
 
 ## Install locally
 
-Target API: AVLite 0.5.3 through 0.5.x. From this directory:
+Target API: AVLite 0.6.6 or newer. From this directory:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-Keep this folder named `avlite_a2rl_tube_mpc`. Add it to your active AVLite
-profile using an absolute path (replace the example):
+Install it from AVLite's Community Plugins page, or add a local checkout to
+your active AVLite profile using an absolute path (replace the example). The
+folder name becomes the plugin's import name and its `plugins:` section key:
 
 ```yaml
 c69_apps:
   c62_community_plugins:
-    avlite_a2rl_tube_mpc: C:/path/to/avlite_a2rl_tube_mpc
+    race_tube_mpc: C:/path/to/race_tube_mpc
   c62_load_plugins: true
 c40_execution:
   c40_controller: A2RLTubeMPCController
   c40_control_dt: 0.02
 plugins:
-  avlite_a2rl_tube_mpc:
+  race_tube_mpc:
     closed_path: false
     wheelbase: 3.115
     max_steer: 0.38
@@ -70,8 +71,8 @@ plugins:
 Merge these entries with your profile; select your own bridge and planners.
 Set `closed_path: true` only if every incoming plan describes a full circuit.
 Keep it false for rolling local plans. Missing speed samples mean a zero
-target speed. Parameters are exposed through AVLite's settings interface;
-`settings.py` and the controller share the class in `parameters.py`.
+target speed. Parameters live in `settings.py` as an AVLite `SettingsSchema`
+singleton, so AVLite loads, validates and saves them with the profile.
 
 Vehicle defaults are A2RL-style research estimates from AA05, not calibrated
 private vehicle data. No full-speed A2RL lap or real-car validation is claimed.

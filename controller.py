@@ -9,7 +9,7 @@ import osqp
 from avlite.c30_control.c31_control_model import AckermannControlCommand
 from avlite.c30_control.c32_control_strategy import ControlStrategy
 
-from .parameters import PluginSettings
+from .settings import PluginSettings
 from .reference import sample_reference
 from .tube_mpc import TubeMPCSolver
 
@@ -20,7 +20,7 @@ class A2RLTubeMPCController(ControlStrategy):
     def __init__(self, tj=None, setting=None):
         super().__init__(tj=tj)
         self.setting = setting or PluginSettings
-        cfg = {key: getattr(self.setting, key) for key in PluginSettings.__annotations__}
+        cfg = self.setting.model_dump()
         if not all(math.isfinite(v) for v in cfg.values()):
             raise ValueError("Controller settings must be finite")
         for key in ("wheelbase", "max_steer", "max_steer_rate", "dt", "max_deceleration"):
